@@ -1,0 +1,39 @@
+name: lmappshow
+channels:
+  - apple
+  - pytorch-nightly
+  - conda-forge
+dependencies:
+  - python=3.9
+  - pytorch
+  - tensorflow-deps
+  - torchvision
+  - numpy
+  - plotly
+  - pip
+  - pip:
+    - tensorflow-metal
+    - tensorflow-macos
+    - ipywidgets==7.7.2
+    - seaborn
+    - ipython
+    - psutil
+    - scikit-image
+    - black
+    - pytest
+    - wandb
+    - isort
+    - scikit-learn
+    - pandas
+    - pyarrow
+    - polars
+    - imblearn
+    - xgboost
+    - interpret
+    - lime
+    - shap
+    - yellowbrick
+    - pytorch-tabnet
+    - tabpfn
+    - autogluon
+    - fastapi

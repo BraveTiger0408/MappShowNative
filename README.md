@@ -1,8 +1,6 @@
 ## mappshow
 Medical APPointment SHOW
 
-<i>Telemedicine 2023 university project</i>
-
 ### Description
 mappshow is a cross-platform application that allows to predict whether a patient will show up for a medical appointment or not. The application is based on a dataset of medical appointments in Brazil and is inspired by the [Kaggle challenge](https://www.kaggle.com/joniarroba/noshowappointments).
 
@@ -24,14 +22,19 @@ FastAPI documentation is available at http://localhost:8000/docs.
 
 ### Run the application
 #### Run the server FastAPI
+Set up virtual environment and install dependencies, then run the server:
+
 `cd backend`
-(set up a virtual environment if you want to with dependencies)
+
 `python main.py`
 
 #### Run the client React Native
-Use the Expo Go app to scan the QR code displayed in the terminal after running the following command:
+Use the Expo Go app to scan the QR code displayed in the terminal after running the following commands:
+
 `cd frontend`
+
 `npm install`
+
 `npm start`
 
 When running the application, pay attention to ports used by the server and the client.

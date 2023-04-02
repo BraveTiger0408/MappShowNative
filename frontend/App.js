@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Text, View, TextInput, TouchableOpacity, Switch } from 'react-native';
 import { KeyboardAvoidingView, Platform } from 'react-native';
-import Probability from './Components/Probability';
-import { styles } from './styles';
+import Probability from './components/Probability';
+import { styles } from './styles/styles';
 
 
 const IP_ADDRESS = "localhost";
-const API_URL = `http://${IP_ADDRESS}:8000/appointment`;
+const API_URL = `http://${IP_ADDRESS}:8002/appointment`;
 
 export default function App() {
   const [age, setAge] = useState('');
