@@ -6,7 +6,7 @@ const Probability = () => {
 
   return (
     <View>
-      <Text style={{ fontSize: 20 }}>Probability of no-show: {probability}</Text>
+      <Text style={{ fontSize: 14, margin: 5 }}>Probability of no-show: {probability}</Text>
     </View>
   );
 };

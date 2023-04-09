@@ -10,13 +10,25 @@ export const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     title: {
+      fontSize: 18,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      marginBottom: 10,
+    },
+    main_title: {
       fontSize: 24,
       fontWeight: 'bold',
       textAlign: 'center',
-      marginBottom: 20,
+      marginBottom: 2,
     },
     formGroup: {
       marginBottom: 10,
+    },
+    formGroupPatient: {
+      marginBottom: 10,
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'space-between',
     },
     // switch stick to the right 
     switchGroup: {
@@ -29,7 +41,6 @@ export const styles = StyleSheet.create({
       flex: 1,
       fontSize: 18,
     },
-  
     input: {
       borderWidth: 1,
       borderColor: '#ccc',
