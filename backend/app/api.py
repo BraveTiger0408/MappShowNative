@@ -47,8 +47,10 @@ class AppointmentData(BaseModel):
     has_diabetes: bool
     has_alcoholism: bool
     has_handicap: bool
-    waiting_days: int
+    waiting_days_group: int
     sms_received: bool
+    appointment_month: int
+    appointment_day_of_week: int
 
 
 @app.post("/appointment")
@@ -56,15 +58,17 @@ def create_appointment(appointment_data: AppointmentData):
     model = pickle.load(open('models/xgboost_cls.pkl', 'rb'))
 
     gender = appointment_data.gender
+    age_group_int = 0
     has_hypertension = appointment_data.has_hypertension
     has_diabetes = appointment_data.has_diabetes
     has_alcoholism = appointment_data.has_alcoholism
     has_handicap = appointment_data.has_handicap
+
     sms_received = appointment_data.sms_received
-    appointment_month = 5
-    appointment_day_of_week = 4
-    age_group_int = 0
-    awaiting_time_group = 0
+    awaiting_time_group = appointment_data.waiting_days_group
+    appointment_month = appointment_data.appointment_month
+    appointment_day_of_week = appointment_data.appointment_day_of_week
+
 
     df = pd.DataFrame(columns=FEATURES)
         

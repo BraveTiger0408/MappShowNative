@@ -18,12 +18,11 @@ const MONTHS = [
   { id: 12, name: 'December' },
 ];
 
-const MonthSelector = ({ onMonthSelect }) => {
+const MonthSelector = () => {
   const [selectedMonth, setSelectedMonth] = useState(null);
 
   const handleMonthSelect = (month) => {
     setSelectedMonth(month);
-    onMonthSelect(month);
   };
 
   return (

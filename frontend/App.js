@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
-import { Text, View, TextInput, TouchableOpacity, Switch } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { KeyboardAvoidingView, Platform } from 'react-native';
-import Probability from './components/Probability';
+
 import DayOfWeekSelector from './components/DaySelector';
 import MonthSelector from './components/MonthSelector';
+import Checkbox from './components/Checkbox';
+import SMSReminderSwitch from './components/Switch';
+import AgeInput from './components/AgeInput';
+import AwaitTimePicker from './components/AwaitTimePicker';
+import AppointmentSummary from './components/SummaryView';
+
 import { styles } from './styles/styles';
+import { selector_style } from './styles/selector';
 
 
 const IP_ADDRESS = "localhost";
@@ -13,24 +20,26 @@ const API_URL = `http://${IP_ADDRESS}:8002/appointment`;
 export default function App() {
   const [age, setAge] = useState('');
   const [waitingDays, setWaitingDays] = useState('');
-  
-  const [hasScholarship, setHasScholarship] = useState(false);
-  const [hasHypertension, setHasHypertension] = useState(false);
-  const [hasAlcoholism, setHasAlcoholism] = useState(false);
-  const [hasHandicap, setHasHandicap] = useState(false);
-  const [hasDiabetes, setHasDiabetes] = useState(false);
-  const [hasSmsReceived, setHasSmsReceived] = useState(false);
+  const [appointmentData, setAppointmentData] = useState(null);
 
-  const handleSubmit = () => {
+  const [diabetes, setDiabetes] = useState(false);
+  const [alcoholism, setAlcoholism] = useState(false);
+  const [hypertension, setHypertension] = useState(false);
+  const [handicap, setHandicap] = useState(false);
+
+  const [smsReceived, setSmsReceived] = useState(false);
+
+  const [predictionData, setPredictionData] = useState(null);
+
+  const handleSubmit = async () => {
     const appointmentData = {
       age: parseInt(age),
-      has_scholarship: hasScholarship,
-      has_hypertension: hasHypertension,
-      has_diabetes: hasDiabetes,
-      has_alcoholism: hasAlcoholism,
-      has_handicap: hasHandicap,
+      has_hypertension: hypertension,
+      has_diabetes: diabetes,
+      has_alcoholism: alcoholism,
+      has_handicap: handicap,
       waiting_days: parseInt(waitingDays),
-      sms_received: hasSmsReceived
+      sms_received: smsReceived
     };
 
     fetch(API_URL, {
@@ -53,104 +62,44 @@ export default function App() {
 
   return (
     <KeyboardAvoidingView
-    style={styles.container}
-    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-    <View style={styles.container}>
-      <Text style={styles.title}>Medical appointment patient show up prediction</Text>
+    <Text style={styles.main_title}>Medical appointment patient show up prediction</Text>
+      <View style={styles.container}>
+        <Text style={styles.title}>Appointment Information</Text>
 
-      <DayOfWeekSelector />
-      <MonthSelector />
-
-      <View style={styles.formGroup}>
-        <Text style={styles.label}>Age</Text>
-        <TextInput
-          style={styles.input}
-          value={age}
-          maxLength={3}
-          onChangeText={setAge}
-          keyboardType="numeric"
-          placeholder="Enter patient's age"
-        />
-    </View>
-
-      <View style={styles.formGroup}>
-        <View style={styles.switchGroup}>
-          <Text style={styles.label}>Scholarship</Text>
-          <Switch
-            value={hasScholarship}
-            onValueChange={setHasScholarship}
-          />
+        <DayOfWeekSelector />
+        <MonthSelector />
+        <View style={styles.formGroup}>
+          <Text style={selector_style.label}>Input the number of appointment awaiting days</Text>
+          <AwaitTimePicker value={waitingDays} onChange={setWaitingDays} />
         </View>
-      </View>
-
-      <View style={styles.formGroup}>
-        <View style={styles.switchGroup}>
-          <Text style={styles.label}>Hypertension</Text>
-          <Switch
-            value={hasHypertension}
-            onValueChange={setHasHypertension}
-          />
+        <View style={styles.formGroup}>
+          <Text style={selector_style.label}>Did the patient receive a SMS remainer?</Text>
+          <SMSReminderSwitch value={smsReceived} onChange={setSmsReceived} />
         </View>
-      </View>
 
-      <View style={styles.formGroup}>
-        <View style={styles.switchGroup}>
-          <Text style={styles.label}>Diabetes</Text>
-          <Switch
-            value={hasDiabetes}
-            onValueChange={setHasDiabetes}
-          />
+        <Text style={styles.title}>Patient Information</Text>
+        <View style={styles.formGroup}>
+          <Text style={selector_style.label}>How old is the patient?</Text>
+          <AgeInput value={age} onChange={setAge} />
         </View>
-      </View>
 
-      <View style={styles.formGroup}>
-        <View style={styles.switchGroup}>
-          <Text style={styles.label}>Alcoholism</Text>
-          <Switch
-            value={hasAlcoholism}
-            onValueChange={setHasAlcoholism}
-          />
+        <View style={styles.formGroup}>
+          <Text style={selector_style.label}>What is the patient's condition?</Text>
+          <Checkbox label="Diabetes" value={diabetes} onChange={setDiabetes} />
+          <Checkbox label="Alcoholism" value={alcoholism} onChange={setAlcoholism} />
+          <Checkbox label="Hypertension" value={hypertension} onChange={setHypertension} />
+          <Checkbox label="Handicap" value={handicap} onChange={setHandicap} />
         </View>
+
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>Submit</Text>
+        </TouchableOpacity>
+
+        
       </View>
-
-      <View style={styles.formGroup}>
-        <View style={styles.switchGroup}>
-          <Text style={styles.label}>Handicap</Text>
-          <Switch
-            value={hasHandicap}
-            onValueChange={setHasHandicap}
-          />
-        </View>
-      </View>
-
-      <View style={styles.formGroup}>
-        <Text style={styles.label}>Waiting Days</Text>
-        <TextInput
-          style={styles.input}
-          value={waitingDays}
-          onChangeText={setWaitingDays}
-          keyboardType="numeric"
-          placeholder="Enter the number of waiting days"
-        />
-      </View>
-
-      <View style={styles.formGroup}>
-        <View style={styles.switchGroup}>
-          <Text style={styles.label}>SMS Received</Text>
-          <Switch
-            value={hasSmsReceived}
-            onValueChange={setHasSmsReceived}
-          />
-        </View>
-      </View>
-
-      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Submit</Text>
-      </TouchableOpacity>
-
-      <Probability />
-    </View>
     </KeyboardAvoidingView>
   );
 }
