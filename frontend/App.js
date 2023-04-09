@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Text, View, TextInput, TouchableOpacity, Switch } from 'react-native';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 import Probability from './components/Probability';
+import DayOfWeekSelector from './components/DaySelector';
+import MonthSelector from './components/MonthSelector';
 import { styles } from './styles/styles';
 
 
@@ -55,7 +57,10 @@ export default function App() {
     behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
     <View style={styles.container}>
-      <Text style={styles.title}>Medical appointment</Text>
+      <Text style={styles.title}>Medical appointment patient show up prediction</Text>
+
+      <DayOfWeekSelector />
+      <MonthSelector />
 
       <View style={styles.formGroup}>
         <Text style={styles.label}>Age</Text>

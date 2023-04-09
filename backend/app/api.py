@@ -12,19 +12,14 @@ app = FastAPI()
 
 FEATURES = [
     'Gender',
-    'Scholarship',
     'Hypertension',
     'Diabetes',
     'Alcoholism',
     'Handicap',
     'SMS_received',
-    'ScheduledHour',
-    'ScheduledMonth',
     'AppointmentMonth',
-    'ScheduledDayOfWeek',
     'AppointmentDayOfWeek',
     'AgeGroupInt',
-    'NeighbourhoodInt',
     'AwaitingTimeGroup',
 ]
 
@@ -58,22 +53,16 @@ class AppointmentData(BaseModel):
 
 @app.post("/appointment")
 def create_appointment(appointment_data: AppointmentData):
-    # load model from models/xgboost_model.pkl
     model = pickle.load(open('models/xgboost_cls.pkl', 'rb'))
 
     gender = appointment_data.gender
-    has_scholarship = appointment_data.has_scholarship
     has_hypertension = appointment_data.has_hypertension
     has_diabetes = appointment_data.has_diabetes
     has_alcoholism = appointment_data.has_alcoholism
     has_handicap = appointment_data.has_handicap
     sms_received = appointment_data.sms_received
     appointment_month = 5
-    scheduled_hour = 10
-    scheduled_month = 5
-    scheduled_day_of_week = 4
     appointment_day_of_week = 4
-    neighbourhood_int = 0
     age_group_int = 0
     awaiting_time_group = 0
 
@@ -81,19 +70,14 @@ def create_appointment(appointment_data: AppointmentData):
         
     df.loc[0] = [
         gender,
-        has_scholarship,
         has_hypertension,
         has_diabetes,
         has_alcoholism,
         has_handicap,
         sms_received,
-        scheduled_hour,
-        scheduled_month,
         appointment_month,
-        scheduled_day_of_week,
         appointment_day_of_week,
         age_group_int,
-        neighbourhood_int,
         awaiting_time_group
     ]
 
