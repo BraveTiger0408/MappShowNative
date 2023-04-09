@@ -9,7 +9,7 @@ const AgeInput = ( {age, setAge} ) => {
   };
 
   return (
-    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+    <View style={{ flexDirection: 'row', alignItems: 'center', padding: 5, }}>
       <Text style={{ marginRight: 10, fontSize: 14 }}>Patient age:</Text>
       <TextInput
         keyboardType="numeric"

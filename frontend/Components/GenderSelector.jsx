@@ -1,38 +1,27 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const GenderSelector = ({ gender, setGender }) => {
 
-  const handleGenderChange = (event) => {
-    console.log(event.target.value)
-    setGender(parseInt(event.target.value));
+  const handleGenderChange = (value) => {
+    setGender(parseInt(value));
   }
 
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Select Gender:</Text>
       <View style={styles.radioContainer}>
-        <View style={styles.radio}>
-          <input
-            type="radio"
-            id="male"
-            name="gender"
-            value="0"
-            checked={gender === 0}
-            onChange={handleGenderChange}
-          />
+        <TouchableOpacity
+          style={[styles.radio, gender === 0 && styles.selected]}
+          onPress={() => handleGenderChange(0)}
+        >
           <Text style={styles.radioLabel}>Male</Text>
-        </View>
-        <View style={styles.radio}>
-          <input
-            type="radio"
-            id="female"
-            name="gender"
-            value="1"
-            checked={gender === 1}
-            onChange={handleGenderChange}
-          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.radio, gender === 1 && styles.selected]}
+          onPress={() => handleGenderChange(1)}
+        >
           <Text style={styles.radioLabel}>Female</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -52,17 +41,24 @@ const styles = StyleSheet.create({
   radioContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    bordeColor: '#ccc',
   },
   radio: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
     marginRight: 10,
+    bordeColor: '#ccc',
+  },
+  selected: {
+    backgroundColor: 'lightblue',
   },
   radioLabel: {
     fontSize: 14,
     fontWeight: 'normal',
+    padding: 3,
   },
 });
 
 export default GenderSelector;
-
