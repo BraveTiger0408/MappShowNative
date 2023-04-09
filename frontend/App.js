@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Button } from 'react-native';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 
 import DayOfWeekSelector from './components/DaySelector';
@@ -9,10 +9,10 @@ import SMSReminderSwitch from './components/Switch';
 import AgeInput from './components/AgeInput';
 import AwaitTimePicker from './components/AwaitTimePicker';
 import GenderSelector from './components/GenderSelector';
+import AppointmentPredictionModal from './components/Modal';
 
 import { styles } from './styles/styles';
 import { selector_style } from './styles/selector';
-
 
 const IP_ADDRESS = "localhost";
 const API_URL = `http://${IP_ADDRESS}:8002/appointment`;
@@ -28,8 +28,10 @@ export default function App() {
   const [waitingDays, setWaitingDays] = useState(0);
   const [selectedMonth, setSelectedMonth] = useState(0);
   const [selectedDay, setSelectedDay] = useState(0);
-
   const [smsReceived, setSmsReceived] = useState(false);
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [summary, setSummary] = useState(0);
 
   const handleSubmit = async () => {
     const appointmentData = {
@@ -55,7 +57,8 @@ export default function App() {
     .then(response => response.json())
     .then(data => {
       console.log(data);
-      // do something with the response if necessary
+      setSummary(data);
+      setModalIsOpen(true);
     })
     .catch(error => {
       console.error(error);
@@ -101,7 +104,9 @@ export default function App() {
         <TouchableOpacity style={styles.button} onPress={handleSubmit}>
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableOpacity>
-        
+
+        <AppointmentPredictionModal summary={summary} modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} />
+
       </View>
     </KeyboardAvoidingView>
   );
