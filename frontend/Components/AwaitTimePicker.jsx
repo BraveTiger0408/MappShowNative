@@ -13,11 +13,11 @@ const AwaitTimePicker = ({ value, onChange }) => {
         selectedValue={value}
         onValueChange={handleWaitingTimeChange}
       >
-        <Picker.Item label="0-1 days" value="1" />
-        <Picker.Item label="1-7 days" value="2" />
-        <Picker.Item label="8-30 days" value="3" />
-        <Picker.Item label="31-90 days" value="4" />
-        <Picker.Item label="91-180 days" value="5" />
+        <Picker.Item label="0-1 days" value="0" />
+        <Picker.Item label="1-7 days" value="1" />
+        <Picker.Item label="8-30 days" value="2" />
+        <Picker.Item label="31-90 days" value="3" />
+        <Picker.Item label="91-180 days" value="4" />
       </Picker>
     </View>
   );
