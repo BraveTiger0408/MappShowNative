@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { selector_style } from '../styles/selector';
-
 
 const MONTHS = [
   { id: 1, name: 'January' },
@@ -18,11 +16,9 @@ const MONTHS = [
   { id: 12, name: 'December' },
 ];
 
-const MonthSelector = () => {
-  const [selectedMonth, setSelectedMonth] = useState(null);
-
-  const handleMonthSelect = (month) => {
-    setSelectedMonth(month);
+const MonthSelector = ({ selectedMonth, setSelectedMonth }) => {
+  const handleMonthSelect = (monthId) => {
+    setSelectedMonth(monthId);
   };
 
   return (
@@ -34,11 +30,16 @@ const MonthSelector = () => {
             key={month.id}
             style={[
               selector_style.monthButton,
-              selectedMonth && selectedMonth.id === month.id && selector_style.selectedMonthButton,
+              selectedMonth === month.id && selector_style.selectedMonthButton,
             ]}
-            onPress={() => handleMonthSelect(month)}
+            onPress={() => handleMonthSelect(month.id)}
           >
-            <Text style={[selector_style.monthButtonText, selectedMonth && selectedMonth.id === month.id && selector_style.selectedMonthButtonText]}>
+            <Text
+              style={[
+                selector_style.monthButtonText,
+                selectedMonth === month.id && selector_style.selectedMonthButtonText,
+              ]}
+            >
               {month.name}
             </Text>
           </TouchableOpacity>
@@ -47,6 +48,5 @@ const MonthSelector = () => {
     </View>
   );
 };
-
 
 export default MonthSelector;

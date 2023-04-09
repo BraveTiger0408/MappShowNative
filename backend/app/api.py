@@ -6,6 +6,10 @@ from pydantic import BaseModel
 import pickle
 import pandas as pd
 
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+
 
 app = FastAPI()
 
@@ -53,6 +57,7 @@ class AppointmentData(BaseModel):
 
 
 def map_age_group(age):
+    logging.debug(f'Mapping age: {age}')
     age_group_map = {'0-1': 1, '2-5': 2, '6-10': 3, '11-15': 4, '16-25': 5, '26-32': 7, '33-42': 8, '43-52': 9, '53-115': 10}
     for age_range, age_group in age_group_map.items():
         age_min, age_max = age_range.split('-')
@@ -63,6 +68,7 @@ def map_age_group(age):
 
 def create_df_instance(appointment_data, features_columns) -> pd.DataFrame:
     df_instance = pd.DataFrame(columns=features_columns)
+
     df_instance.loc[0] = [
         appointment_data.gender,
         appointment_data.has_hypertension,
@@ -75,11 +81,15 @@ def create_df_instance(appointment_data, features_columns) -> pd.DataFrame:
         map_age_group(appointment_data.age),
         appointment_data.waiting_days_group,
     ]
+
+    logging.debug(f'Created df instance:\n{df_instance}')
+
     return df_instance
 
 
 def load_model(model_name: str) -> object:
-    return pickle.load(open(f'../models/{model_name}.pkl', 'rb'))
+    logging.debug(f'Loading model: {model_name}')
+    return pickle.load(open(f'models/{model_name}.pkl', 'rb'))
 
 
 def get_result(model, df_instance) -> tuple:
@@ -97,6 +107,8 @@ def get_result(model, df_instance) -> tuple:
 
 @app.post("/appointment")
 def create_appointment(appointment_data: AppointmentData):
+    logging.debug(f'Received appointment data: {appointment_data}')
+
     model = load_model('xgboost_cls')
 
     df = create_df_instance(appointment_data, FEATURES)
@@ -108,6 +120,8 @@ def create_appointment(appointment_data: AppointmentData):
         with probability: {proba_show}% \
         and will not show up: {proba_not_show}%",
     }
+
+    logging.debug(f'Prediction: {info_mesg}')
     
     return {"message": info_mesg}
 

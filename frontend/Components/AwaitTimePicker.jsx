@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
 import { View, Text, Picker } from 'react-native';
 
-const AwaitTimePicker = () => {
-  const [waitingTime, setWaitingTime] = useState('0-1 days');
-
+const AwaitTimePicker = ({ value, onChange }) => {
   const handleWaitingTimeChange = (value) => {
-    setWaitingTime(value);
+    onChange(value);
   };
 
   return (
@@ -13,14 +10,14 @@ const AwaitTimePicker = () => {
       <Text style={{ flex: 1, fontSize: 14 }}>Appointment waiting time:</Text>
       <Picker
         style={{ flex: 2, borderWidth: 1, borderColor: '#ccc', borderRadius: 5, padding: 3 }}
-        selectedValue={waitingTime}
+        selectedValue={value}
         onValueChange={handleWaitingTimeChange}
       >
-        <Picker.Item label="0-1 days" value="0-1 days" />
-        <Picker.Item label="1-7 days" value="1-7 days" />
-        <Picker.Item label="8-30 days" value="8-30 days" />
-        <Picker.Item label="31-90 days" value="31-90 days" />
-        <Picker.Item label="91-180 days" value="91-180 days" />
+        <Picker.Item label="0-1 days" value="1" />
+        <Picker.Item label="1-7 days" value="2" />
+        <Picker.Item label="8-30 days" value="3" />
+        <Picker.Item label="31-90 days" value="4" />
+        <Picker.Item label="91-180 days" value="5" />
       </Picker>
     </View>
   );

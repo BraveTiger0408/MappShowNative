@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput } from 'react-native';
 
-const AgeInput = () => {
-  const [age, setAge] = useState('');
-
+const AgeInput = ( {age, setAge} ) => {
   const handleAgeChange = (text) => {
     if (text === '' || (parseInt(text) >= 0 && parseInt(text) <= 125)) {
         setAge(text);

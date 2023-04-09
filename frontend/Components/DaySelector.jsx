@@ -1,27 +1,23 @@
-import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { selector_style } from '../styles/selector';
 
-
-
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-const DayOfWeekSelector = () => {
-  const [selectedDay, setSelectedDay] = useState('');
+const DayOfWeekSelector = ({ selectedDay, setSelectedDay }) => {
 
   const handlePress = (day) => {
-    setSelectedDay(day);
+    setSelectedDay(DAYS.indexOf(day));
   };
 
   return (
     <View style={selector_style.container}>
       <Text style={selector_style.label}>Select the day of the appointment:</Text>
       <View style={selector_style.monthContainer}>
-        {DAYS.map((day) => (
+        {DAYS.map((day, index) => (
           <TouchableOpacity
             key={day}
             style={{
-              backgroundColor: selectedDay === day ? '#A02BFF' : 'lightgray',
+              backgroundColor: selectedDay === index ? '#A02BFF' : 'lightgray',
               borderRadius: 5,
               padding: 11,
               margin: 3,

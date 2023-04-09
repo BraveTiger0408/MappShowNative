@@ -1,19 +1,25 @@
 import React, { useState } from 'react';
 import { View, Text, Switch, StyleSheet } from 'react-native';
 
-const SMSReminderSwitch = () => {
+const SMSReminderSwitch = ({ onChange }) => {
   const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
-
+  
+  const toggleSwitch = () => {
+    setIsEnabled(previousState => !previousState);
+    onChange(!isEnabled);
+  };
+  
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Did the patient receive an SMS reminder for their appointment?</Text>
+      <Text style={styles.label}>
+        Did the patient receive an SMS reminder for their appointment?
+      </Text>
       <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+        trackColor={{ false: '#767577', true: '#81b0ff' }}
+        thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
         onValueChange={toggleSwitch}
         value={isEnabled}
-        style={{transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }]}}
+        style={{ transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }] }}
       />
     </View>
   );
