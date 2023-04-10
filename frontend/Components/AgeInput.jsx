@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
 import { View, Text, TextInput } from 'react-native';
 
 const AgeInput = ( {age, setAge} ) => {
-  const handleAgeChange = (text) => {
-    if (text === '' || (parseInt(text) >= 0 && parseInt(text) <= 125)) {
-        setAge(text);
+  const handleAgeChange = (number) => {
+    if (parseInt(number) >= 0 && parseInt(number) <= 125) {
+        setAge(parseInt(number));
       }  
   };
 
   return (
-    <View style={{ flexDirection: 'row', alignItems: 'center', padding: 5, }}>
+    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
       <Text style={{ marginRight: 10, fontSize: 14 }}>Patient age:</Text>
       <TextInput
         keyboardType="numeric"

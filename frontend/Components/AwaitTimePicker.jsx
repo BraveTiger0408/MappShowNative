@@ -1,4 +1,6 @@
-import { View, Text, Picker } from 'react-native';
+import { View, Text } from 'react-native';
+import {Picker} from '@react-native-picker/picker';
+
 
 const AwaitTimePicker = ({ value, onChange }) => {
   const handleWaitingTimeChange = (value) => {

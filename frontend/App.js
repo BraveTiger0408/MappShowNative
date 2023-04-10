@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity, Button } from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 
 import DayOfWeekSelector from './components/DaySelector';
@@ -15,7 +15,7 @@ import { styles } from './styles/styles';
 import { selector_style } from './styles/selector';
 
 const IP_ADDRESS = "localhost";
-const API_URL = `http://${IP_ADDRESS}:8002/appointment`;
+const API_URL = `http://${IP_ADDRESS}:8000/appointment`;
 
 export default function App() {
   const [gender, setGender] = useState(0);
@@ -69,11 +69,13 @@ export default function App() {
   return (
     <KeyboardAvoidingView
       style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      behavior={Platform.OS === 'ios' ? 'padding' : null} // remove preventScroll prop
     >
+    <ScrollView>
     <Text style={styles.main_title}>Medical appointment patient show up prediction</Text>
       <View style={styles.container}>
-        <Text style={styles.title}><hr />Appointment Information</Text>
+
+        <Text style={styles.title}>Appointment Information</Text>
 
         <DayOfWeekSelector selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
         <MonthSelector selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
@@ -86,10 +88,10 @@ export default function App() {
           <SMSReminderSwitch onChange={setSmsReceived} />
         </View>
 
-        <Text style={styles.title}><hr />Patient Information</Text>
+        <Text style={styles.title}>Patient Information</Text>
 
         <View style={styles.formGroupPatient}>
-        <AgeInput age={age} setAge={setAge} />
+          <AgeInput age={age} setAge={setAge} />
           <GenderSelector gender={gender} setGender={setGender}/>
         </View>
 
@@ -108,6 +110,7 @@ export default function App() {
         <AppointmentPredictionModal summary={summary} modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} />
 
       </View>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 }
