@@ -1,6 +1,9 @@
 ## mappshow
 Medical APPointment SHOW
 
+## Demo
+https://github.com/AgataPolejowska/mappshow/assets/44722312/3a87a9d9-d4a1-408b-9886-d7d052caf8dd
+
 ### Description
 mappshow is a cross-platform application that allows to predict whether a patient will show up for a medical appointment or not. The application is based on a dataset of medical appointments in Brazil and is inspired by the [Kaggle challenge](https://www.kaggle.com/joniarroba/noshowappointments).
 
