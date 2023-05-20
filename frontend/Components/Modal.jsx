@@ -25,7 +25,7 @@ const AppointmentPredictionModal = ({ summary, modalIsOpen, setModalIsOpen }) =>
 
           <Text style={modal_style.modalSubtitle}>Patient show up probability</Text>
           <Text>
-            Probability of showing up to the appointment is equal to: {summary && summary.message && summary.message.proba_show}%.
+            Probability of showing up to the appointment is equal to: {summary && summary.message && summary.message.proba_show}%.{"\n"}
             Probability of not showing up to the appointment is equal to: {summary && summary.message && summary.message.proba_not_show}%.
           </Text>
 

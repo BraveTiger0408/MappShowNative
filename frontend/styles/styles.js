@@ -16,10 +16,10 @@ export const styles = StyleSheet.create({
       marginBottom: 10,
     },
     main_title: {
-      fontSize: 24,
+      fontSize: 22,
       fontWeight: 'bold',
       textAlign: 'center',
-      marginBottom: 2,
+      marginBottom: 10,
     },
     formGroup: {
       marginBottom: 10,

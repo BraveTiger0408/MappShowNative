@@ -39,5 +39,4 @@ Use the Expo Go app to scan the QR code displayed in the terminal after running 
 
 When running the application, pay attention to ports used by the server and the client.
 
-Currently client port: 19006 and server: 8002 -> works for web browser
-For Expo Go mobile app it is advised to change the configuration to appropriate ports and IP address.
+For Expo Go mobile app it is advised to change the configuration to appropriate ports and IP address. For checking the app with Expo Go, the IP address should be the same as the one used by the server, can be the private IP address of the computer running the server. Set the appropriate IP_ADDRESS in App.js and main.py for correct communication between the client and the server.

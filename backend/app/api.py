@@ -33,7 +33,7 @@ app.add_middleware(
 def create_appointment(appointment_data: AppointmentData):
     logging.debug(f"Received appointment data: {appointment_data}")
 
-    model = load_model("xgboost_cls")
+    model = load_model("random_forest_model")
 
     df = create_df_instance(appointment_data, FEATURES)
 

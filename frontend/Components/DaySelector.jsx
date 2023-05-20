@@ -18,9 +18,9 @@ const DayOfWeekSelector = ({ selectedDay, setSelectedDay }) => {
             key={day}
             style={{
               backgroundColor: selectedDay === index ? '#A02BFF' : 'lightgray',
-              borderRadius: 5,
-              padding: 11,
-              margin: 3,
+              borderRadius: 3,
+              padding: 8,
+              margin: 2,
             }}
             onPress={() => handlePress(day)}
           >

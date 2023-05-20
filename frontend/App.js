@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
-import { KeyboardAvoidingView, Platform } from 'react-native';
+import { KeyboardAvoidingView, Platform, Dimensions } from 'react-native';
 
 import DayOfWeekSelector from './components/DaySelector';
 import MonthSelector from './components/MonthSelector';
@@ -14,8 +14,8 @@ import AppointmentPredictionModal from './components/Modal';
 import { styles } from './styles/styles';
 import { selector_style } from './styles/selector';
 
-const IP_ADDRESS = "localhost";
-const API_URL = `http://${IP_ADDRESS}:8000/appointment`;
+const IP_ADDRESS = "192.168.1.52";
+const API_URL = `http://${IP_ADDRESS}:8080/appointment`;
 
 export default function App() {
   const [gender, setGender] = useState(0);
@@ -71,24 +71,36 @@ export default function App() {
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : null} // remove preventScroll prop
     >
-    <ScrollView>
+    
+    <ScrollView showsVerticalScrollIndicator={false} scrollEnabled={true}>
     <Text style={styles.main_title}>Medical appointment patient show up prediction</Text>
-      <View style={styles.container}>
 
-        <Text style={styles.title}>Appointment Information</Text>
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
+        <View>
+          <Text style={{width: 100, textAlign: 'center'}}>Appointment Information</Text>
+        </View>
+        <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
+      </View>
+        <View style={styles.container}>
 
         <DayOfWeekSelector selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
         <MonthSelector selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
         <View style={styles.formGroup}>
-          <Text style={selector_style.label}>Input the number of appointment awaiting days</Text>
+          <Text style={selector_style.label}>Input the number of appointment awaiting days and check if the patient received a SMS reminder:</Text>
           <AwaitTimePicker value={waitingDays} onChange={setWaitingDays} />
         </View>
         <View style={styles.formGroup}>
-          <Text style={selector_style.label}>Did the patient receive a SMS remainer?</Text>
           <SMSReminderSwitch onChange={setSmsReceived} />
         </View>
 
-        <Text style={styles.title}>Patient Information</Text>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
+        <View>
+          <Text style={{width: 100, textAlign: 'center'}}>Patient Information</Text>
+        </View>
+        <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
+      </View>
 
         <View style={styles.formGroupPatient}>
           <AgeInput age={age} setAge={setAge} />
@@ -96,7 +108,7 @@ export default function App() {
         </View>
 
         <View style={styles.formGroup}>
-          <Text style={selector_style.label}>What is the patient's condition? Select multiple if necessary</Text>
+          <Text style={selector_style.label}>What is the patient's condition? Select multiple if necessary:</Text>
           <Checkbox label="Diabetes" value={diabetes} onChange={setDiabetes} />
           <Checkbox label="Alcoholism" value={alcoholism} onChange={setAlcoholism} />
           <Checkbox label="Hypertension" value={hypertension} onChange={setHypertension} />

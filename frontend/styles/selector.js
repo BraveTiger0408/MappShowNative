@@ -8,7 +8,7 @@ export const selector_style = StyleSheet.create({
     },
     label: {
       fontWeight: 'bold',
-      fontSize: 16,
+      fontSize: 14,
       marginBottom: 10,
     },
     monthContainer: {
@@ -17,7 +17,7 @@ export const selector_style = StyleSheet.create({
       justifyContent: 'space-between',
     },
     monthButton: {
-      padding: 10,
+      padding: 5,
       borderWidth: 1,
       borderColor: '#ccc',
       borderRadius: 5,

@@ -9,7 +9,7 @@ const AwaitTimePicker = ({ value, onChange }) => {
 
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center', margin: 3}}>
-      <Text style={{ flex: 1, fontSize: 14 }}>Appointment waiting time:</Text>
+      <Text style={{ flex: 1, fontSize: 12 }}>Appointment waiting time:</Text>
       <Picker
         style={{ flex: 2, borderWidth: 1, borderColor: '#ccc', borderRadius: 5, padding: 3 }}
         selectedValue={value}

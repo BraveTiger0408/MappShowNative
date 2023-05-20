@@ -12,7 +12,7 @@ const SMSReminderSwitch = ({ onChange }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>
-        Did the patient receive an SMS reminder for their appointment?
+        Did the patient receive an SMS reminder?
       </Text>
       <Switch
         trackColor={{ false: '#767577', true: '#81b0ff' }}
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     margin: 3,
   },
   label: {
-    fontSize: 14,
+    fontSize: 12,
   },
 });
 
